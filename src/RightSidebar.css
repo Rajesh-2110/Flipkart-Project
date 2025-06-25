@@ -1,0 +1,45 @@
+.card{
+    font-family: Arial, sans-serif;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    width: 150px;
+    padding: 5px;
+}
+
+.product-img{
+    margin-bottom: 8px;
+    height: 100px;
+    width: 150px;
+}
+.product-img:hover {
+    width: 300px;
+    height: 300px;
+    cursor: pointer;
+}
+.brand-name{
+    padding: 0%;
+    margin: none;
+    opacity: 0.6; 
+    height: 0;
+   
+}
+.price{
+    margin:0;
+    font-weight: bold;
+    color: #212121;
+    font-size: 14px;
+    height: 0;
+}
+.discount{
+    color: green;
+    height: 0;
+}
+.hot-deal{
+    display: inline-block;
+    background-color: #388e3c;
+    color: white;
+    font-size: 12px;
+    border-radius: 1px;
+    font-weight: 600;
+}
