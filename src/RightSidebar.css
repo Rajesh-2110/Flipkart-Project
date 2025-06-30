@@ -1,3 +1,9 @@
+.card-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
 .card{
     font-family: Arial, sans-serif;
     text-align: center;
@@ -32,8 +38,9 @@
     height: 0;
 }
 .discount{
-    color: green;
     height: 0;
+    color: green;
+    font-size: 13px;
 }
 .hot-deal{
     display: inline-block;
