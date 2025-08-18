@@ -5,6 +5,7 @@ function LeftSidebar() {
   const [brand, setBrand] = useState("");
   const [price, setPrice] = useState("");
   const [offer, setOffer] = useState("");
+  const [items, setItems] = useState([]);
 
   const handleInputBrand = (e) => {
     setBrand(e.target.value);
@@ -18,9 +19,20 @@ function LeftSidebar() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    console.log(brand);
-    console.log(price);
-    console.log(offer);
+
+    const newItem = {
+      brand,
+      price,
+      offer,
+    };
+
+    setItems([...items, newItem]);
+
+    console.log("Items array:", [...items, newItem]);
+
+    setBrand("");
+    setPrice("");
+    setOffer("");
   };
 
   return (
