@@ -1,40 +1,34 @@
 import React, { useState } from "react";
 import "./LeftSidebar.css";
 
-function LeftSidebar() {
-  const [brand, setBrand] = useState("");
-  const [price, setPrice] = useState("");
-  const [offer, setOffer] = useState("");
-  const [items, setItems] = useState([]);
+function LeftSidebar({ products, setProducts }) {
+  let initialValue = { brandName: "", price: "", offer: "", imageUrl: "" };
 
-  const handleInputBrand = (e) => {
-    setBrand(e.target.value);
-  };
-  const handleInputPrice = (e) => {
-    setPrice(e.target.value);
-  };
-  const handleInputOffer = (e) => {
-    setOffer(e.target.value);
+  const [formValue, setFormValue] = useState(initialValue);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValue((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleClick = (e) => {
     e.preventDefault();
-
-    const newItem = {
-      brand,
-      price,
-      offer,
+    const newProduct = {
+      id: products.length + 1,
+      image: formValue.imageUrl.startsWith("http")
+        ? formValue.imageUrl
+        : `/images/${formValue.imageUrl}`,
+      name: formValue.brandName,
+      price: parseInt(formValue.price, 10) || 0,
+      discount: formValue.offer.replace("%", "") + "%",
     };
 
-    setItems([...items, newItem]);
-
-    console.log("Items array:", [...items, newItem]);
-
-    setBrand("");
-    setPrice("");
-    setOffer("");
+    setProducts([...products, newProduct]);
+    setFormValue(initialValue);
   };
-
   return (
     <div className="sidebar-left">
       <div className="filter-section">
@@ -47,15 +41,15 @@ function LeftSidebar() {
         ))}
       </div>
       <div className="form-left">
-        <form action="post" onSubmit={handleClick}>
+        <form onSubmit={handleClick}>
           <legend>Product Details</legend>
           <input
             type="text"
             name="brandName"
             className="input-brand"
             placeholder="Brand Name"
-            value={brand}
-            onChange={handleInputBrand}
+            value={formValue.brandName}
+            onChange={handleInputChange}
             required
           />
           <input
@@ -63,22 +57,25 @@ function LeftSidebar() {
             name="price"
             className="input-number"
             placeholder="Enter Price"
-            value={price}
-            onChange={handleInputPrice}
+            value={formValue.price}
+            onChange={handleInputChange}
             required
           />
           <input
-            type="url"
+            type="text"
             name="imageUrl"
             placeholder="Enter Image URL"
             className="input-url"
+            value={formValue.imageUrl}
+            onChange={handleInputChange}
+            required
           />
           <input
             type="text"
             name="offer"
             className="input-offer"
-            value={offer}
-            onChange={handleInputOffer}
+            value={formValue.offer}
+            onChange={handleInputChange}
             placeholder="Offer %"
             required
           />
